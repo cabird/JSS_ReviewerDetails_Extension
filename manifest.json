@@ -1,9 +1,9 @@
 {
-  "name": "JSS Details Scraper",
-  "version": "0.0.1",
+  "name": "JSS Reviewer Details",
+  "version": "0.0.2",
   "manifest_version": 2,
-  "description": "This extension was created with the awesome extensionizr.com",
-  "homepage_url": "http://extensionizr.com",
+  "description": "Loads reviwer details into the 'Submissions Under Review' table.",
+  "homepage_url": "http://github.com/cabird/JSS_ReviewerDetails_Extension",
   "icons": {
     "16": "icons/icon16.png",
     "48": "icons/icon48.png",
@@ -27,11 +27,9 @@
       ]
     },
     {
-      "matches": [
-        "https://ees.elsevier.com/*"
-      ],
-      "js": [
-        "js/jquery/jquery.js", "src/inject/script.js", "src/inject/inject.js"
+      "matches": [ "https://ees.elsevier.com/*"],
+      "js": ["js/jquery/jquery.js", "src/inject/inject.js"],
+      
       ]
     }
   ]
