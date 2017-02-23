@@ -1,12 +1,11 @@
 {
   "name": "JSS Reviewer Details",
-  "version": "0.0.2",
+  "short_name": "JSS Reviewer",
+  "version": "0.0.5",
   "manifest_version": 2,
-  "description": "Loads reviwer details into the 'Submissions Under Review' table.",
+  "description": "Loads reviewer details into the 'Submissions Under Review' table.",
   "homepage_url": "http://github.com/cabird/JSS_ReviewerDetails_Extension",
   "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
   "default_locale": "en",
@@ -19,18 +18,10 @@
   ],
   "content_scripts": [
     {
-      "matches": [
-        "https://ees.elsevier.com/*"
-      ],
-      "css": [
-        "src/inject/inject.css"
-      ]
-    },
-    {
       "matches": [ "https://ees.elsevier.com/*"],
       "js": ["js/jquery/jquery.js", "src/inject/inject.js"],
-      
-      ]
+      "css": ["src/inject/inject.css"],
+      "all_frames": true
     }
   ]
 }

@@ -6,21 +6,20 @@ function GetValue(el) {
     }
 }
 
-function InsertReviewerInfo(insertPointSelector, htmlDoc, docId) {
+function InsertReviewerInfo(insertPointSelector, docId) {
     var id = "DetailsFor" + docId;
-    $("a[name='" + docId + "']", htmlDoc)
+    $("a[name='" + docId + "']")
         .parents("tr")
         .append("<td id='" + id + "' class='nowrap'></td>");
 
     var html = "";
-    $(insertPointSelector, htmlDoc)
+    $(insertPointSelector)
 	.find("span[id*='reviewerRepeater']")
 	.each(function() {
         var el = $(this).parents("tr").first();
         console.log("=== RECORD ===");
         var labelRE = new RegExp("[^:]*");
         var valueRE = new RegExp("[^([]*");
-
 
         while (true) {
             var cells = el.find("td");
@@ -36,15 +35,15 @@ function InsertReviewerInfo(insertPointSelector, htmlDoc, docId) {
         html += "<hr>";
     });
     html = html.substring(0, html.length - 4);
-    $(insertPointSelector, htmlDoc).hide();
-    $("#" + id, htmlDoc).append(html);
+    $(insertPointSelector).hide();
+    $("#" + id).append(html);
 }
 
-function LoadDetails(htmlDoc) {
+function LoadDetails() {
     /* add the table header first */
-    $("#datatable thead tr", htmlDoc).append("<th>Reviewer<br>Details</th>");
+    $("#datatable thead tr").append("<th>Reviewer<br>Details</th>");
 
-    var tags = $("a:contains('Details')", htmlDoc);
+    var tags = $("a:contains('Details')");
     tags.each(function(index) {
         var href = $(this).attr("href");
         var pieces = /([0-9]+).+(JSS[^']*).+([0-9]+)/.exec(href);
@@ -52,9 +51,9 @@ function LoadDetails(htmlDoc) {
         var rootUrl = "https://ees.elsevier.com/jss/";
         var url = rootUrl + "EMDetails.aspx?docid=" + pieces[1] + "&ms_num=" + pieces[2] + "&sectionID=" + pieces[3];
         var id = "TableFrom" + docId;
-        $("body", htmlDoc).append("<div id='" + id + "'></div>");
-        $("#" + id, htmlDoc).load(url + " #MainDataTable", function(data) {
-            InsertReviewerInfo("#" + id, htmlDoc, docId);
+        $("body").append("<div id='" + id + "'></div>");
+        $("#" + id).load(url + " #MainDataTable", function(data) {
+            InsertReviewerInfo("#" + id, docId);
         });
     });
 }
@@ -65,25 +64,11 @@ chrome.extension.sendMessage({}, function(response) {
         if (document.readyState === "complete") {
             clearInterval(readyStateCheckInterval);
             console.log("Loading Details...");
-            var frame;
-            for (var i = 0; i < window.parent.frames.length; i++) {
-                if (window.parent.frames[i].name == "content") {
-                    frame = window.parent.frames[i];
-                }
-            }
-            if (!frame) {
-                console.log("could not find 'content' frame");
-                return;
-            }
-            console.log("found content frame");
-	    frame.document.body.onload = function() {
-                    console.log("now loading details");
-                    LoadDetails(frame.document);
-                }
-            if (frame.document.readyState == "complete") {
+	    if ($("#datatable"))
+            { 
                 console.log("now loading details");
-                LoadDetails(frame.document);
-            } 
+                LoadDetails();
+	    }
         }
     }, 10);
 });
