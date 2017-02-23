@@ -1,7 +1,7 @@
 {
   "name": "JSS Reviewer Details",
   "short_name": "JSS Reviewer",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "manifest_version": 2,
   "description": "Loads reviewer details into the 'Submissions Under Review' table.",
   "homepage_url": "http://github.com/cabird/JSS_ReviewerDetails_Extension",

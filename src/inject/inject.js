@@ -1,9 +1,24 @@
+
+/*
+
+   agreed_to_review color:#EE6600;
+   reviewer_invited style="color:#FF0000;"
+   review_complete color:#008800;
+   reviewer_declined style="color:#000000;
+
+*/
+
 function GetValue(el) {
     if (el.has("input").length) {
         return el.children("input").first().attr("value").trim();
     } else {
         return el.text().trim();
     }
+}
+
+function WrapWithClass(el) {
+	var cls = el.toLowerCase().replace(/[^0-9a-z]/g, "_");
+	return "<span class='" + cls + "'>" + el + "</span>";
 }
 
 function InsertReviewerInfo(insertPointSelector, docId) {
@@ -29,7 +44,7 @@ function InsertReviewerInfo(insertPointSelector, docId) {
             var value = GetValue(cells.first().next());
             value = valueRE.exec(value)[0].trim();
             console.log("  " + label + " = " + value);
-            html += label + ": " + value + "<br>";
+            html += label + ": " + WrapWithClass(value) + "<br>";
             el = el.next();
         }
         html += "<hr>";
