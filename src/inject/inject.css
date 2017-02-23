@@ -1,15 +1,6 @@
-/**
- * Place your custom CSS styles here.
- **/
-
-/*
-
-   agreed_to_review color:#EE6600;
-   reviewer_invited style="color:#FF0000;"
-   review_complete color:#008800;
-   reviewer_declined style="color:#000000;
-
-*/
+/* these are the colors used for the different classes
+ * in the paper details page.  So we color the status
+ * when we add them to the table */
 
 .agreed_to_review { color:#EE6600; }
 .reviewer_invited { color:#FF0000; }
