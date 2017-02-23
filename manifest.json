@@ -1,7 +1,7 @@
 {
   "name": "JSS Reviewer Details",
   "short_name": "JSS Reviewer",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "manifest_version": 2,
   "description": "Loads reviewer details into the 'Submissions Under Review' table.",
   "homepage_url": "http://github.com/cabird/JSS_ReviewerDetails_Extension",
@@ -19,9 +19,12 @@
   "content_scripts": [
     {
       "matches": [ "https://ees.elsevier.com/*"],
-      "js": ["js/jquery/jquery.js", "src/inject/inject.js"],
+      "js": [ "src/inject/analytics.js", "js/jquery/jquery.js", "src/inject/inject.js"],
       "css": ["src/inject/inject.css"],
       "all_frames": true
     }
-  ]
+  ],
+  "web_accessible_resources": ["ga.js"],
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'"
+  
 }
